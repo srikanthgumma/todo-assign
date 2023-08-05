@@ -2,7 +2,7 @@
   "name": "todo-assignmt",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://srikanthgumma.github.io/todo_Repo",
+  "homepage": "https://srikanthgumma.github.io/todo-assign",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
