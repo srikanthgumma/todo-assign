@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import './App.css'
 
+
 function Todo_Assignment() {
 
 
@@ -83,12 +84,20 @@ function Todo_Assignment() {
 
     let mapData = tododata.map((value, ind) => {
         return (
-            <div id="todo" key={ind} style={{ backgroundColor: value.completed ? 'skyblue' : 'pink'}}>
+            <div id="todo" key={ind} style={{ backgroundColor: value.completed ? 'skyblue' : 'pink' }}>
 
                 <div >
 
-                    <span className="thickid">Id is {value.id} {"  "}</span><span className="thickstatus">Status - {value.completed ? "Completed" : "Not Completed"}</span><br />
-                    <span id="sizefont"><span className="title">Title -</span> <span  style={{ textDecoration: value.completed ? 'none' : 'line-through' }}>{value.title}</span></span>
+                    <span className="thickid">Id is {value.id} {"  "}</span><span className="thickstatus" style={{ fontSize: "10px" }}> Status - {value.completed ? "Completed" : <><span>Not Completed</span><input type="checkbox" style={{ fontSize: "70px", width: "40px", height: "20px" }} onClick={(e) => {
+                        console.log(e.target.checked);
+                        if (e.target.checked === true) {
+                            value.completed = true
+                            setData([...tododata])
+
+                        }
+                    }} /></>}</span>
+                    <br />
+                    <span id="sizefont"><span className="title">Title -</span> <span style={{ textDecoration: value.completed ? 'none' : 'line-through' }}>{value.title}</span></span>
                     <div id="todobuttons">
                         <button onClick={() => editing(value.title, ind)}>EDIT</button>
                         <button onClick={() => deleting(ind)}>DELETE</button>
