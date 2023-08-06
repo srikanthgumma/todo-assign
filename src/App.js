@@ -8,7 +8,7 @@ function Todo_Assignment() {
     let [val, setVal] = useState('');
     let [tododata, setData] = useState([]);
 
-   
+
 
     useEffect(() => {
         axios.get("https://jsonplaceholder.typicode.com/users/1/todos").then((val) => {
@@ -16,30 +16,30 @@ function Todo_Assignment() {
         })
     }, []);
 
-    useEffect(()=>{
-       if(val!=''){
+    useEffect(() => {
+        if (val != '') {
 
-        axios.post("https://jsonplaceholder.typicode.com/users/1/todos", {
-            userId: 1,
-            id: 20,
-            title: val,
-            completed: true
-        }).then((varo)=>{
-            // setData(varo.data)
-            setData([...tododata, varo.data])
+            axios.post("https://jsonplaceholder.typicode.com/users/1/todos", {
+                userId: 1,
+                id: 20,
+                title: val,
+                completed: true
+            }).then((varo) => {
+                // setData(varo.data)
+                setData([...tododata, varo.data])
 
-        })
-       }
+            })
+        }
 
 
-    },[val])
+    }, [val])
 
     const submitAction = (e) => {
         e.preventDefault();
         //    console.log(e);
         if (e.target[0].value !== '') {
             setVal(e.target[0].value)
-          
+
             // setData([...tododata, adddata]);
         } else {
             alert("Should not be empty")
@@ -52,7 +52,7 @@ function Todo_Assignment() {
         let newvalue = prompt(`Edit the value ${titleval}`)
         if (newvalue !== '') {
             let namee = {
-                userId:1,
+                userId: 1,
                 id: id + 1,
                 title: newvalue,
                 completed: true
@@ -69,8 +69,8 @@ function Todo_Assignment() {
 
     const deleting = (id) => {
         // axios.delete(`https://jsonplaceholder.typicode.com/users/1/todos?id=${Number(id)}`).then((vall) => {
-            // console.log(vall.data)
-            // setData(vall.data);
+        // console.log(vall.data)
+        // setData(vall.data);
         // })
         tododata.splice(id, 1);
         setData([...tododata])
@@ -83,12 +83,12 @@ function Todo_Assignment() {
 
     let mapData = tododata.map((value, ind) => {
         return (
-            <div id="todo" key={ind} style={{ backgroundColor: value.completed ? 'skyblue' : 'pink' }}>
+            <div id="todo" key={ind} style={{ backgroundColor: value.completed ? 'skyblue' : 'pink'}}>
 
                 <div >
 
-                    <span className="thickid">Id is {value.id} {"  "}</span><span className="thickstatus">Status - {value.completed ? "Completed" : "Not Completed"}</span><span className="thickstatus1">{!value.completed && <span style={{ fontSize: "9px", color: "blue" }}>Edit the task toComplete</span>}</span><br />
-                    <span id="sizefont"><span className="title">Title -</span> {value.title}</span>
+                    <span className="thickid">Id is {value.id} {"  "}</span><span className="thickstatus">Status - {value.completed ? "Completed" : "Not Completed"}</span><br />
+                    <span id="sizefont"><span className="title">Title -</span> <span  style={{ textDecoration: value.completed ? 'none' : 'line-through' }}>{value.title}</span></span>
                     <div id="todobuttons">
                         <button onClick={() => editing(value.title, ind)}>EDIT</button>
                         <button onClick={() => deleting(ind)}>DELETE</button>
