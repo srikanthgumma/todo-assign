@@ -8,6 +8,7 @@ function Todo_Assignment() {
 
     let [val, setVal] = useState('');
     let [tododata, setData] = useState([]);
+    let [neww, setneww] = useState(false);
 
 
 
@@ -88,16 +89,18 @@ function Todo_Assignment() {
 
                 <div >
 
-                    <span className="thickid">Id is {value.id} {"  "}</span><span className="thickstatus" style={{ fontSize: "10px" }}> Status - {value.completed ? "Completed" : <><span>Not Completed</span><input type="checkbox" style={{ fontSize: "70px", width: "40px", height: "20px" }} onClick={(e) => {
+                    <span className="thickid">Id is {value.id} {"  "}</span><span className="thickstatus" style={{ fontSize: "10px" }}> Status - {value.completed ? "Completed" : <><span>Not Completed</span><input type="checkbox" placeholder="click" style={{ fontSize: "70px", width: "40px", height: "20px" }} onClick={(e,vali) => {
                         console.log(e.target.checked);
                         if (e.target.checked === true) {
-                            value.completed = true
-                            setData([...tododata])
+                            value.completed = true;
+                            let textDecoration='line-through';
+                            value.title = <span style={{textDecoration:"line-through"}}>{value.title}</span>
+                            setData([...tododata]);
 
                         }
                     }} /></>}</span>
                     <br />
-                    <span id="sizefont"><span className="title">Title -</span> <span style={{ textDecoration: value.completed ? 'none' : 'line-through' }}>{value.title}</span></span>
+                    <span id="sizefont"><span className="title">Title -</span> <span>{value.title}</span></span>
                     <div id="todobuttons">
                         <button onClick={() => editing(value.title, ind)}>EDIT</button>
                         <button onClick={() => deleting(ind)}>DELETE</button>
